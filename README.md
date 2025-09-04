@@ -15,7 +15,7 @@ curl -s https://raw.githubusercontent.com/tijoseymathew/qwen-code-docker/main/in
 ```
 
 This will:
-- Download the run script to `~/.local/bin/qwen-code`
+- Download the run script to `~/.local/bin/qwen`
 - Make the script executable
 
 ## Usage
