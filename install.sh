@@ -28,5 +28,4 @@ fi
 
 echo "Installation complete!"
 echo "You can now use 'qwen build' to build the Docker image"
-echo "and 'qwen run' to run Qwen Code"
-
+echo "and 'qwen' to run Qwen Code (image will be built automatically if not found)"

@@ -22,13 +22,15 @@ This will:
 
 Run Qwen Code in its isolated Docker environment:
 ```bash
-qwen run
+qwen
 ```
 
 This will:
 - Mount your current directory to `/home/ubuntu/app` in the container
 - Preserve authentication data in the `~/.qwen` directory
 - Run Qwen Code with full filesystem access to your current project
+
+If the Docker image is not found, it will be automatically built before running the container.
 
 ## Prerequisites
 
