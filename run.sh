@@ -1,14 +1,22 @@
 #!/bin/bash
 
+# Default paths for Qwen Code Docker Wrapper
+QWEN_DIR="$HOME/.qwen"
+CONFIG_FILE="$HOME/.config/configstore/update-notifier-@qwen-code/qwen-code.json"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 case "$1" in
 run)
+  # Create directories if they don't exist
+  mkdir -p "$QWEN_DIR"
+  mkdir -p "$(dirname "$CONFIG_FILE")"
+  touch "$CONFIG_FILE"
+
   docker run \
     --rm \
     -it \
-    -v $SCRIPT_DIR/auth:/home/ubuntu/.qwen \
-    -v $SCRIPT_DIR/config/qwen-code.json:/home/ubuntu/.config/configstore/update-notifier-@qwen-code/qwen-code.json \
+    -v "$QWEN_DIR:/home/ubuntu/.qwen" \
+    -v "$CONFIG_FILE:/home/ubuntu/.config/configstore/update-notifier-@qwen-code/qwen-code.json" \
     -v $PWD:/home/ubuntu/app \
     qwen-code:latest
   ;;
