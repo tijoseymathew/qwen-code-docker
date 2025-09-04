@@ -11,7 +11,7 @@ This project wraps [Qwen Code](https://github.com/QwenLM/qwen-code) in a Docker 
 ## Installation
 
 ```bash
-curl -s https://raw.githubusercontent.com/tijoseymathew/qwen-code-docker/main/install.sh | bash
+curl -s https://raw.githubusercontent.com/tijoseymathew/qwen-code-docker/refs/heads/main/install.sh | bash
 ```
 
 This will:
