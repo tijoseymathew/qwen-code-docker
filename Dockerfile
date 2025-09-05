@@ -29,4 +29,4 @@ RUN npm config set prefix '~/.local/' \
 WORKDIR /home/ubuntu/app
 
 # Start qwen as default cmd
-CMD ["/home/ubuntu/.local/bin/qwen"]
+ENTRYPOINT ["/home/ubuntu/.local/bin/qwen"]

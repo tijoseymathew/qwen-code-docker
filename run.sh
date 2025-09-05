@@ -58,7 +58,8 @@ run_container() {
     -v "$QWEN_DIR:/home/ubuntu/.qwen" \
     -v "$CONFIG_FILE:/home/ubuntu/.config/configstore/update-notifier-@qwen-code/qwen-code.json" \
     -v $PWD:/home/ubuntu/app \
-    qwen-code:latest
+    qwen-code:latest \
+    "$@"
 }
 
 # Parse command line arguments
@@ -80,6 +81,6 @@ build)
   build_image
   ;;
 *)
-  run_container
+  run_container "${@}"
   ;;
 esac
