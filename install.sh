@@ -11,12 +11,18 @@ echo "Installing Qwen Code Docker Wrapper from $BASE_URL..."
 # Create ~/.local/bin if it doesn't exist
 mkdir -p "$HOME/.local/bin"
 
-# Extract base URL by removing the filename
 # Download the run script
 curl -s -o "$HOME/.local/bin/qwen" "$BASE_URL/run.sh"
 
 # Make it executable
 chmod +x "$HOME/.local/bin/qwen"
+
+# Download Dockerfile from GitHub and build the image directly
+echo "Downloading Dockerfile and building qwen-code image..."
+curl -s -o - "$BASE_URL/Dockerfile" | docker build \
+  --build-arg USER_UID=$(id -u) \
+  --build-arg USER_GID=$(id -g) \
+  -t qwen-code -f - "$HOME/.local/bin"
 
 # Check if ~/.local/bin is in PATH
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
@@ -27,5 +33,4 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 fi
 
 echo "Installation complete!"
-echo "You can now use 'qwen build' to build the Docker image"
-echo "and 'qwen' to run Qwen Code (image will be built automatically if not found)"
+echo "You can now use 'qwen' to run Qwen Code"

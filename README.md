@@ -17,6 +17,7 @@ curl -s https://raw.githubusercontent.com/tijoseymathew/qwen-code-docker/refs/he
 This will:
 - Download the run script to `~/.local/bin/qwen`
 - Make the script executable
+- Download the Dockerfile from the GitHub repository and build the Docker image
 
 ## Usage
 
@@ -29,8 +30,6 @@ This will:
 - Mount your current directory to `/home/ubuntu/app` in the container
 - Preserve authentication data in the `~/.qwen` directory
 - Run Qwen Code with full filesystem access to your current project
-
-If the Docker image is not found, it will be automatically built before running the container.
 
 ## Prerequisites
 

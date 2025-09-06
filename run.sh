@@ -9,34 +9,19 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 show_help() {
   echo "Qwen Code Docker Wrapper"
   echo ""
-  echo "Usage: $0 [COMMAND] [OPTIONS]"
-  echo ""
-  echo "Commands:"
-  echo "  run    Run the qwen-code container (default)"
-  echo "  build  Build the qwen-code image"
+  echo "Usage: $0 [OPTIONS]"
   echo ""
   echo "Options:"
   echo "  -h, --help  Show this help message"
   echo ""
   echo "Examples:"
-  echo "  $0          # Run the container (default)"
-  echo "  $0 run      # Run the container"
-  echo "  $0 build    # Build the image"
+  echo "  $0          # Run the container"
   echo "  $0 --help   # Show help"
 }
 
 # Function to check if docker image exists
 image_exists() {
   docker image inspect qwen-code:latest >/dev/null 2>&1
-}
-
-# Function to build the docker image
-build_image() {
-  echo "Building qwen-code image..."
-  docker build \
-    --build-arg USER_UID=$(id -u) \
-    --build-arg USER_GID=$(id -g) \
-    -t qwen-code "$SCRIPT_DIR"
 }
 
 # Function to run the docker container
@@ -46,10 +31,10 @@ run_container() {
   mkdir -p "$(dirname "$CONFIG_FILE")"
   touch "$CONFIG_FILE"
 
-  # Check if image exists, build if not found
+  # Check if image exists, notify user if not found
   if ! image_exists; then
-    echo "qwen-code image not found. Building image first..."
-    build_image
+    echo "qwen-code image not found. Please re-run the installer to build the image."
+    exit 1
   fi
 
   docker run \
@@ -76,11 +61,4 @@ for arg in "$@"; do
   esac
 done
 
-case "$1" in
-build)
-  build_image
-  ;;
-*)
-  run_container "${@}"
-  ;;
-esac
+run_container "${@}"
